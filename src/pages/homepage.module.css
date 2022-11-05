@@ -1,0 +1,25 @@
+.mainClass {
+  border: 2px solid red;
+  width: 80vw;
+  /* height: 100vh; */
+  margin: 1rem auto;
+}
+
+.searchForm {
+  width: 60%;
+  height: 5rem;
+  margin: 4rem auto;
+  border: 1px solid red;
+  display: flex;
+  align-items: center;
+}
+.searchForm button {
+  width: 10%;
+  margin-left: 1rem;
+  height: 90%;
+}
+
+.dataBoard {
+  width: 100%;
+  border: 1px solid teal;
+}
