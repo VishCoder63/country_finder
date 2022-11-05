@@ -22,10 +22,13 @@ export const HomePage = () => {
     getCountries(country);
   };
   const sortCountry = (data) => {
-    alert("a");
-  };
-  const filterCountry = (data) => {
-    alert("b");
+    if (+countryData[0].population > +countryData[1].population) {
+      const d = countryData?.sort((a, b) => +a.population - +b.population);
+      setCountryData(d);
+    } else {
+      const d = countryData?.sort((a, b) => +b.population - +a.population);
+      setCountryData(d);
+    }
   };
   const uniqueRegions = () => {
     const uniqueRegions = {};
