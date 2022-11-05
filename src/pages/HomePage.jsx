@@ -1,4 +1,4 @@
-import { Button, Select, SliderThumb } from "@mui/material";
+import { Button } from "@mui/material";
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -23,7 +23,7 @@ export const HomePage = () => {
     getCountries(country);
   };
   const sortCountry = () => {
-    if (sort == "asc") {
+    if (sort === "asc") {
       const d = countryData?.sort((a, b) => +a.population - +b.population);
       setCountryData(d);
       setSort("dsc");
@@ -59,7 +59,7 @@ export const HomePage = () => {
           style={{ width: "15rem", height: "2rem", fontSize: "1rem" }}
           defaultValue={"Select Region to sort"}
           onChange={(el) => {
-            if (el.target.value == "all") getCountries(country);
+            if (el.target.value === "all") getCountries(country);
             else
               setCountryData(
                 countryData.filter((c) => c.region === el.target.value)
