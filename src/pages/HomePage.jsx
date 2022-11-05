@@ -1,4 +1,4 @@
-import { Button } from "@mui/material";
+import { Button, Select, SliderThumb } from "@mui/material";
 import axios from "axios";
 import { useEffect } from "react";
 import { useState } from "react";
@@ -19,8 +19,18 @@ export const HomePage = () => {
     setCountryData(countries.data);
   };
   const searchCountry = (data) => {
-    // alert(country);
     getCountries(country);
+  };
+  const sortCountry = (data) => {
+    alert("a");
+  };
+  const filterCountry = (data) => {
+    alert("b");
+  };
+  const uniqueRegions = () => {
+    const uniqueRegions = {};
+    countryData?.map((el) => (uniqueRegions[el.region] = 1));
+    return Object.keys(uniqueRegions);
   };
   return (
     <div className={styles.mainClass}>
@@ -35,6 +45,36 @@ export const HomePage = () => {
           Submit
         </Button>
       </form>
+      <div className={styles.actions}>
+        <Button variant="contained" onClick={() => sortCountry()}>
+          Sort
+        </Button>
+        <select
+          defaultValue={"Select Region to sort"}
+          onChange={(el) => {
+            if (el.target.value == "all") getCountries(country);
+            else
+              setCountryData(
+                countryData.filter((c) => c.region === el.target.value)
+              );
+          }}
+        >
+          <option
+            value="all"
+            defaultValue="all"
+            onClick={() => getCountries("")}
+          >
+            all
+          </option>
+          {uniqueRegions()?.map((el) => (
+            <option
+              onClick={console.log(countryData.filter((c) => c.region === el))}
+            >
+              {el}
+            </option>
+          ))}
+        </select>
+      </div>
       <div className={styles.dataBoard}>
         {countryData?.map((el) => (
           <CountryComp data={el} />
