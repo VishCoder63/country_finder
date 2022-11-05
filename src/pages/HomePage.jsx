@@ -9,12 +9,18 @@ export const HomePage = () => {
   const [country, setCountry] = useState("");
   const [countryData, setCountryData] = useState([]);
   useEffect(() => {
-    getCountries();
+    getCountries("");
   }, []);
-  const getCountries = async () => {
-    const countries = await axios.get("https://restcountries.com/v3.1/all");
+  const getCountries = async (data) => {
+    if (data === "") data = "all";
+    else data = `name/${data}`;
+    const countries = await axios.get(`https://restcountries.com/v3.1/${data}`);
     console.log(countries.data);
     setCountryData(countries.data);
+  };
+  const searchCountry = (data) => {
+    // alert(country);
+    getCountries(country);
   };
   return (
     <div className={styles.mainClass}>
@@ -25,7 +31,7 @@ export const HomePage = () => {
           onChange={(e) => setCountry(e.target.value)}
           style={{ width: "85%", height: "90%" }}
         />
-        <Button type={"submit"} variant="contained">
+        <Button variant="contained" onClick={() => searchCountry(country)}>
           Submit
         </Button>
       </form>

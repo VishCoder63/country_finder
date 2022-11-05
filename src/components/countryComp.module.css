@@ -1,5 +1,17 @@
 .countryDiv {
   border: 1px solid red;
-  width: 20%;
-  height: 10rem;
+  width: 22%;
+  height: 35rem;
+  margin: 1rem 0;
+  text-align: center;
+}
+
+.countryDiv img {
+  width: 100%;
+  height: 45%;
+}
+.countryDiv div {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }

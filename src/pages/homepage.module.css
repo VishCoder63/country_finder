@@ -22,4 +22,7 @@
 .dataBoard {
   width: 100%;
   border: 1px solid teal;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
 }
