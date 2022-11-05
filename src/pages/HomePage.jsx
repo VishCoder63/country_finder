@@ -7,6 +7,7 @@ import styles from "./homepage.module.css";
 
 export const HomePage = () => {
   const [country, setCountry] = useState("");
+  const [sort, setSort] = useState("asc");
   const [countryData, setCountryData] = useState([]);
   useEffect(() => {
     getCountries("");
@@ -21,13 +22,15 @@ export const HomePage = () => {
   const searchCountry = (data) => {
     getCountries(country);
   };
-  const sortCountry = (data) => {
-    if (+countryData[0].population > +countryData[1].population) {
+  const sortCountry = () => {
+    if (sort == "asc") {
       const d = countryData?.sort((a, b) => +a.population - +b.population);
       setCountryData(d);
+      setSort("dsc");
     } else {
       const d = countryData?.sort((a, b) => +b.population - +a.population);
       setCountryData(d);
+      setSort("asc");
     }
   };
   const uniqueRegions = () => {
@@ -53,6 +56,7 @@ export const HomePage = () => {
           Sort
         </Button>
         <select
+          style={{ width: "15rem", height: "2rem", fontSize: "1rem" }}
           defaultValue={"Select Region to sort"}
           onChange={(el) => {
             if (el.target.value == "all") getCountries(country);
@@ -70,11 +74,7 @@ export const HomePage = () => {
             all
           </option>
           {uniqueRegions()?.map((el) => (
-            <option
-              onClick={console.log(countryData.filter((c) => c.region === el))}
-            >
-              {el}
-            </option>
+            <option value={el}>{el}</option>
           ))}
         </select>
       </div>
