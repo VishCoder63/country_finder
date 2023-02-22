@@ -1,7 +1,10 @@
+import { useNavigate } from "react-router-dom";
 import styles from "./countryComp.module.css";
 export const CountryComp = ({ data }) => {
+  const navigate=useNavigate();
+  console.log({data});
   return (
-    <div className={styles.countryDiv}>
+    <div className={styles.countryDiv} onClick={()=>navigate(data.name.official)}>
       <img src={data?.flags.png} alt="" />
       <h2>{data?.name.common}</h2>
       <div>

@@ -16,7 +16,6 @@ export const HomePage = () => {
     if (data === "") data = "all";
     else data = `name/${data}`;
     const countries = await axios.get(`https://restcountries.com/v3.1/${data}`);
-    console.log(countries.data);
     setCountryData(countries.data);
   };
   const searchCountry = (data) => {
