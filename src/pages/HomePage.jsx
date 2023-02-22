@@ -48,7 +48,7 @@ export const HomePage = () => {
           style={{ width: "85%", height: "90%" }}
         />
         <Button variant="contained" onClick={() => searchCountry(country)}>
-          Submit
+          Submit...
         </Button>
       </form>
       <div className={styles.actions}>
