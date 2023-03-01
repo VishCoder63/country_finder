@@ -1,7 +1,8 @@
 import { Button } from "@mui/material";
 import axios from "axios";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import { useState } from "react";
+import Helmet from "react-helmet";
 import { CountryComp } from "../components/CountryComp";
 import styles from "./homepage.module.css";
 
@@ -38,50 +39,57 @@ export const HomePage = () => {
     return Object.keys(uniqueRegions);
   };
   return (
-    <div className={styles.mainClass}>
-      <form className={styles.searchForm}>
-        <input
-          type="text"
-          placeholder="Enter country to be searched"
-          onChange={(e) => setCountry(e.target.value)}
-          style={{ width: "85%", height: "90%" }}
-        />
-        <Button variant="contained" onClick={() => searchCountry(country)}>
-          Submit...
-        </Button>
-      </form>
-      <div className={styles.actions}>
-        <Button variant="contained" onClick={() => sortCountry()}>
-          Sort
-        </Button>
-        <select
-          style={{ width: "15rem", height: "2rem", fontSize: "1rem" }}
-          defaultValue={"Select Region to sort"}
-          onChange={(el) => {
-            if (el.target.value === "all") getCountries(country);
-            else
-              setCountryData(
-                countryData.filter((c) => c.region === el.target.value)
-              );
-          }}
-        >
-          <option
-            value="all"
-            defaultValue="all"
-            onClick={() => getCountries("")}
+    <React.Fragment>
+
+      <Helmet>
+        <title>Country List</title>
+        <meta name="description" content={"country list dashboard"} />
+      </Helmet>
+      <div className={styles.mainClass}>
+        <form className={styles.searchForm}>
+          <input
+            type="text"
+            placeholder="Enter country to be searched"
+            onChange={(e) => setCountry(e.target.value)}
+            style={{ width: "85%", height: "90%" }}
+          />
+          <Button variant="contained" onClick={() => searchCountry(country)}>
+            Submit...
+          </Button>
+        </form>
+        <div className={styles.actions}>
+          <Button variant="contained" onClick={() => sortCountry()}>
+            Sort
+          </Button>
+          <select
+            style={{ width: "15rem", height: "2rem", fontSize: "1rem" }}
+            defaultValue={"Select Region to sort"}
+            onChange={(el) => {
+              if (el.target.value === "all") getCountries(country);
+              else
+                setCountryData(
+                  countryData.filter((c) => c.region === el.target.value)
+                );
+            }}
           >
-            all
-          </option>
-          {uniqueRegions()?.map((el) => (
-            <option value={el}>{el}</option>
+            <option
+              value="all"
+              defaultValue="all"
+              onClick={() => getCountries("")}
+            >
+              all
+            </option>
+            {uniqueRegions()?.map((el) => (
+              <option value={el}>{el}</option>
+            ))}
+          </select>
+        </div>
+        <div className={styles.dataBoard}>
+          {countryData?.map((el) => (
+            <CountryComp data={el} />
           ))}
-        </select>
+        </div>
       </div>
-      <div className={styles.dataBoard}>
-        {countryData?.map((el) => (
-          <CountryComp data={el} />
-        ))}
-      </div>
-    </div>
+    </React.Fragment>
   );
 };

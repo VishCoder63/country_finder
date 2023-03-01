@@ -1,5 +1,6 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
+import Helmet from "react-helmet";
 import { useParams } from "react-router-dom"
 import { CountryComp } from "./CountryComp";
 
@@ -16,5 +17,16 @@ export const CountryComponent=()=>{
         fetchCountry()
 
     },[params.cntryname])
-    return (country.name && <CountryComp data={country}/>)
+    return (
+        <React.Fragment>
+            {console.log(country)}
+            <Helmet>
+                <title>{country.name ? country.name.common:""}</title>
+                <meta name="description" content={country.name ? country.name.common:"country_details"} />
+                <meta name='icon' content={country.name ?country.flag:""}/>
+                <meta property='og:image' content={country.name ?country.flag:""}/>
+            </Helmet>
+
+        {country.name && <CountryComp data={country}/>}
+        </React.Fragment>)
 }
